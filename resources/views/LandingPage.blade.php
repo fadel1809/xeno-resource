@@ -16,8 +16,8 @@
     }
 </style>
 <body class="bg-[#380606] flex justify-center">
-    <div class="container lg:justify-center lg:items-center lg:h-screen">
-            <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 hidden lg:block rounded-2xl" alt="DLS">
+    <div class="lg:block hidden container justify-center items-center h-screen">
+            <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 block rounded-2xl" alt="DLS">
             <div class="absolute z-10 rounded-md top-32 left-[3.7em]  opacity-90">
                 <div class="flex">
                     <div class="bg-[#D26F37] flex py-5 flex-col justify-center items-center rounded-l-md" >
@@ -59,6 +59,9 @@
                     
                 </div>
             </div>
+    </div>
+    <div class="lg:hidden">
+        <h1 class="text-6xl" >Fadel</h1>
     </div>
 </body>
 
