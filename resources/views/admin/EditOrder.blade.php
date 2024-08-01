@@ -16,7 +16,7 @@
     </style>
 </head>
 <body class="bg-[#380606] flex justify-center min-h-screen relative tracking-wider">
-    <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl" alt="DLS">
+    <img src="/assets/image/bgdls.png" class="absolute hidden lg:block top-6 left-11 z-1 opacity-70 rounded-2xl" alt="DLS">
     <div class="relative z-10 bg-black bg-opacity-50 p-6 shadow-lg rounded-md my-10 w-full max-w-xl">
         <h1 class="text-2xl text-white text-center mb-2">Edit Order</h1>
         <form action="/register" method="POST" class="space-y-4">

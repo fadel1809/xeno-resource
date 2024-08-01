@@ -45,9 +45,9 @@
         </div>
     </div>
     <a href="https://discordapp.com/users/1050097422593949808" class="">
-        <div class="text-purple-800 text-center absolute top-3/4 right-4 md:right-10 z-10 bg-gray-300 rounded-full py-2 md:py-3 border-4 border-purple-700 px-4 md:px-5 hover:text-gray-300 hover:bg-purple-800 hover:border-purple-800">
+        <div class="text-purple-800 text-center absolute top-3/4 right-4 md:right-10 z-10 bg-gray-300 rounded-full py-3 md:py-3 border-4 border-purple-700 px-3 md:px-2 hover:text-gray-300 hover:bg-purple-800 hover:border-purple-800">
             <i class="fa-brands fa-discord text-4xl md:text-6xl text-center"></i>
-            <p class="text-xs md:text-md text-center font-bold tracking-wider">Contact us!</p>
+            <p class="text-xs md:text-md text-center font-bold lg:tracking-wider">Contact us!</p>
         </div>
     </a>
 </body>
