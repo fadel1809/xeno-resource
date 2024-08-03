@@ -19,8 +19,17 @@
     <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl hidden lg:block" alt="DLS">
     <div class="relative z-10 bg-black bg-opacity-50 p-6 shadow-lg rounded-md my-10 w-full max-w-xl">
         <h1 class="text-2xl text-white text-center mb-2">Register Customer</h1>
-        <form action="/register" method="POST" class="space-y-4">
+        <form action={{route('admin.register.customer',['id' => $userId])}} method="POST" class="space-y-4">
             <!-- Username Field -->
+             @if ($errors->any())
+                                    <div class="bg-red-800 py-2 px-2 rounded-md w-full block text-white">
+                                        @foreach ($errors->all() as $error)
+                                        {{ $error."!" }}
+                                        @endforeach
+                                    </div>
+                                @endif
+            @method("POST")
+            @csrf
             <div>
                 <label for="username" class="block text-sm mb-1 text-white">Username</label>
                 <input type="text" id="username" name="username" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" required>
@@ -33,7 +42,7 @@
             <!-- Region Field -->
             <div>
                 <label for="region" class="block text-sm mb-1 text-white">Region</label>
-                <input type="text" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" required>
+                <input type="text" name="region" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" required>
             </div>
             <!-- Submit Button -->
             <div class="text-center">

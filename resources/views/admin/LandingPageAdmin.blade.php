@@ -20,7 +20,7 @@
 <body class="bg-[#380606] flex justify-center min-h-screen relative">
 
     <!-- Gambar dihapus untuk responsivitas lebih baik di layar kecil -->
-    <!-- <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl" alt="DLS"> -->
+    <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl lg:block hidden" alt="DLS"> 
 
     <div class="relative z-10 bg-black bg-opacity-50 p-6 shadow-lg rounded-md my-10 w-full max-w-xl mx-4 sm:mx-auto">
         <h1 class="text-2xl text-white text-center mb-4">
@@ -29,7 +29,7 @@
         <a href={{ route("admin.register.customer", ['id' => '1']) }} class="block bg-green-600 hover:bg-green-500 text-white tracking-wider rounded-md px-4 py-2 text-center mb-4">
             Register Customer
         </a>
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto lg:overflow-hidden">
             <table class="min-w-full divide-y divide-gray-700 mt-3">
                 <thead>
                     <tr class="text-center text-lg">
@@ -39,18 +39,21 @@
                     </tr>
                 </thead>
                 <tbody class="bg-red-700 divide-y divide-gray-800 text-white">
+                    @foreach ($data as $item)
                     <tr class="text-center">
-                        <td class="px-4 py-4 whitespace-nowrap tracking-widest">HANZsasacsacsac</td>
-                        <td class="px-4 py-4 whitespace-nowrap tracking-widest">REGION 16</td>
+                        <td class="px-4 py-4 whitespace-nowrap tracking-widest"> {{$item->username}} </td>
+                        <td class="px-4 py-4 whitespace-nowrap tracking-widest"> {{$item->region}} </td>
                         <td class="tracking-wider px-4 py-4 whitespace-nowrap">
-                            <a href={{ route("admin.track.customer", ['id' => '1', 'customer' => "hanz"]) }} class="mr-2 hover:text-red-500">
+                            <a href={{ route("admin.track.customer", ['id' => $admin, 'customer' => $item->username]) }} class="mr-2 hover:text-red-500">
                                 Track Order
                             </a>
-                            <a href={{ route("admin.edit.customer", ['id' => '1', 'customer' => "hanz"]) }} class="hover:text-red-500">
+                            <a href={{ route("admin.edit.customer", ['id' => $admin, 'customer' => $item->username]) }} class="hover:text-red-500">
                                 Edit
                             </a>
-                        </td>
+                        </td>    
+                        
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

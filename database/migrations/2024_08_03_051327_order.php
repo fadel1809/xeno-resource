@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id(); // Primary key
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id(); 
+            $table->string('user_id');
             $table->string('username');
-            $table->string('password');
-            $table->string('region');
-            $table->enum('role',['admin','user'])->default('user');
-            $table->timestamps(); // Created at and updated at columns
+            $table->string('food');
+            $table->string('wood');
+            $table->string('steel');
+            $table->string('oil');
+            $table->string('order_date');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('users');
+                 Schema::dropIfExists('orders');
     }
 };

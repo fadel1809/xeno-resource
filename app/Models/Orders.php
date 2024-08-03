@@ -4,21 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-class User extends Model
+
+class Orders extends Model
 {
-     use HasApiTokens, HasFactory, Notifiable;
-    
+    use HasFactory,Notifiable,HasApiTokens;
      protected $fillable = [
-        'username',
-        'password',
-        'region'
-    ];
-     protected $hidden = [
-        'password',
+        'food',
+        'wood',
+        'steel',
+        'oil',
+        'user_id',
+        'order_date',
+        'username'
     ];
     protected $casts = [
         'email_verified_at' => 'datetime',

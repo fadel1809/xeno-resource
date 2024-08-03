@@ -20,25 +20,23 @@
 <body class="bg-[#380606] flex justify-center min-h-screen relative tracking-wider">
 
     <!-- Gambar dihapus untuk responsivitas lebih baik di layar kecil -->
-    <!-- <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl" alt="DLS"> -->
+     <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl lg:block hidden" alt="DLS"> 
 
     <div class="relative z-10 bg-black bg-opacity-50 p-6 shadow-lg rounded-md my-10 w-full max-w-xl mx-4 sm:mx-auto">
         <h1 class="text-2xl text-white text-center mb-4">Edit Data Customer</h1>
-        <form action="/register" method="POST" class="space-y-4">
+        <form action={{route('admin.edit.customer',['id' => $admin->id, 'customer' => $user->username])}} method="POST" class="space-y-4">
             <!-- Username Field -->
+            @method('PUT')
+            @csrf
             <div>
                 <label for="username" class="block text-sm mb-1 text-white">Username</label>
-                <input type="text" id="username" name="username" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" required>
+                <input type="text" id="username" name="username" value={{$user->username}} class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" required>
             </div>
             <!-- Password Field -->
-            <div>
-                <label for="password" class="block text-sm mb-1 text-white">Password</label>
-                <input type="password" id="password" name="password" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" required>
-            </div>
             <!-- Region Field -->
             <div>
                 <label for="region" class="block text-sm mb-1 text-white">Region</label>
-                <input type="text" id="region" name="region" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" required>
+                <input type="text" id="region" name="region" value={{$user->region}} class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" required>
             </div>
             <!-- Submit Button -->
             <div class="text-center">
