@@ -142,35 +142,66 @@ class adminController extends Controller
 
 
     }
-    public function showLandingAdminPage($id)
+    public function showLandingAdminPage($id, Request $request)
     {
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
         $admin = User::find($id);
         $users = User::where('role','=', 'user')->get(); 
         return view('admin/LandingPageAdmin',['data' => $users],compact('admin'));
     }
-    public function showRegisterCustomerPage($id){
+    public function showRegisterCustomerPage($id,Request $request)
+    {
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
         return view('admin/RegisterCustomer',['userId'=>$id]);
     }
-    public function showEditCustomerPage($id,$customer){
+    public function showEditCustomerPage($id,$customer,Request $request){
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
         $admin = User::find($id);
         $user = User::where('username','=', $customer)->first(); 
 
         return view('admin/EditCustomer', compact('admin'), compact('user'));
     }
-    public function showTrackOrderCustomerPage($id,$customer){
+    public function showTrackOrderCustomerPage($id,$customer, Request $request){
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
         $admin = User::find($id);
         $user = User::where('username', '=', $customer)->first();
         $orders = Orders::where('user_id','=',$user->id)->get();
 
         return view('admin/TrackOrderCustomer',['data' => $orders], compact('admin','user'));
     }
-    public function showEditOrderPage($id,$customer,$orderId){
+    public function showEditOrderPage($id,$customer,$orderId, Request $request){
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
         $order = Orders::find($orderId);
         $admin = User::find($id);
         $user = User::where('username', '=', $customer)->first();
         return view('admin/EditOrder',compact('order','admin','user'));
     }
-    public function showAddOrderPage($id,$customer){
+    public function showAddOrderPage($id,$customer, Request $request){
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
         $admin = User::find($id);
         $user = User::where('username', '=', $customer)->first();
         return view('admin/AddOrderCustomer',compact('user'),compact('admin'));

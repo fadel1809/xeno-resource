@@ -34,12 +34,14 @@
                     </tr>
                 </thead>
                 <tbody class="bg-red-700 divide-y divide-gray-800 text-white">
+                    @foreach ($data as $item)
                     <tr class="text-center">
-                        <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">1.000.000.000</td>
-                        <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">1.000.000.000</td>
-                        <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">1.000.000.000</td>
-                        <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">1.000.000.000</td>
+                        <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->food}}</td>
+                        <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->wood}}</td>
+                        <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->steel}}</td>
+                        <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->oil}}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

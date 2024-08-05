@@ -28,19 +28,19 @@
                             <tbody>
                                 <td class="flex justify-center items-center mt-2">
                                     <img src="/assets/image/food.png" class="w-2/12 rounded-full" alt="">
-                                    <p class="text-white text-lg ml-2">FOOD : 1.000 M/25$</p>
+                                    <p class="text-white text-lg ml-2">FOOD : 1.000 M/20$</p>
                                 </td>
                                 <td class="flex justify-center items-center my-2">
                                     <img src="/assets/image/wood.png" class="w-2/12 rounded-full" alt="">
-                                    <p class="text-white text-lg ml-2">WOOD : 1.000 M/25$</p>
+                                    <p class="text-white text-lg ml-2">WOOD : 1.000 M/20$</p>
                                 </td>
                                 <td class="flex justify-center items-center">
                                     <img src="/assets/image/steel.png" class="w-2/12 rounded-full mr-4 tracking-wide" alt="">
-                                    <p class="text-white text-lg ml-2">STEEL : 500 M/25$</p>
+                                    <p class="text-white text-lg ml-2">STEEL : 500 M/20$</p>
                                 </td>
                                 <td class="flex justify-center items-center mt-2">
                                     <img src="/assets/image/oil.png" class="w-2/12 rounded-full mr-7" alt="">
-                                    <p class="text-white text-lg tracking-wide">  OIL : 500 M/25$</p>
+                                    <p class="text-white text-lg tracking-wide">  OIL : 500 M/20$</p>
                                 </td>
                             </tbody>
                         </table>

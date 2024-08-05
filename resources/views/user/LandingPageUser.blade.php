@@ -31,15 +31,17 @@
                 </tr>
             </thead>
             <tbody class="bg-red-700 divide-y divide-gray-800 text-white">
+                @foreach ($data as $item)
                 <tr class="text-center">
-                    <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">1</td>
-                    <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">29/07/2024</td>
+                    <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->id}}</td>
+                    <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->order_date}}</td>
                     <td class="tracking-wider px-2 py-4 whitespace-nowrap">
-                        <a href={{route("user.detail.order",['id'=>'1','orderId' => "2"])}} class="text-xs md:text-sm mr-2 hover:text-red-500">
+                        <a href={{route("user.detail.order",['id'=>$user->id,'orderId' => $item->id])}} class="text-xs md:text-sm mr-2 hover:text-red-500">
                             Detail Order
                         </a> 
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

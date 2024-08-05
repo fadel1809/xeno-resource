@@ -43,7 +43,7 @@
             <button type="submit" class="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition-colors">Login</button>
         </form>
     </div>
-    <div class="fixed bottom-5 right-5">
+    <div class="fixed bottom-5 z-100 right-5">
 
         <a href="https://discordapp.com/users/1050097422593949808" class="">
             <div class="text-purple-800 text-center fixed bottom-5 right-2 z-100 bg-gray-300 rounded-full py-3  border-4 border-purple-700 px-2  hover:text-gray-300 hover:bg-purple-800 hover:border-purple-800">
