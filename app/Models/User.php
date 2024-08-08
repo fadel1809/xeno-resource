@@ -15,12 +15,10 @@ class User extends Model
      protected $fillable = [
         'username',
         'password',
-        'region'
+        'region',
+        'loyalty_point'
     ];
      protected $hidden = [
         'password',
-    ];
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 }

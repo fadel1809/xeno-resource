@@ -20,12 +20,12 @@
 <body class="bg-[#380606] flex justify-center min-h-screen relative tracking-wider">
     <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl lg:block hidden " alt="DLS">
     <div class="relative z-10 bg-black bg-opacity-50 p-6 shadow-lg rounded-md my-10 w-full max-w-xl">
-       <a href={{ route('admin.home',['id' => $admin->id]) }} class="mb-3 bg-blue-700 hover:bg-blue-400 text-white px-4 py-1 rounded-md">
+       <a href={{ route('admin.home',['id' => $admin->id]) }} class="bg-blue-700 hover:bg-blue-400 text-white px-4 py-1 rounded-md">
             <i class="fa-solid fa-arrow-left"></i>
             Back
         </a>
-        <h1 class="text-2xl text-white text-center mt-2 mb-2">Add Order To {{$user->username}} </h1>
-        <form action={{route('admin.add.order',['id'=>$admin->id,'customer'=>$user->username])}} method="POST" class="space-y-4">
+        <h1 class="text-2xl text-white text-center mb-2">Add Delivery </h1>
+        <form action={{route('admin.add.detail.order',['id'=>$admin->id,'customer'=>$user->username,'orderId' =>Str($orders->id)  ])}} method="POST" class="space-y-4">
             @if ($errors->any())
                 <div class="bg-red-800 py-2 px-2 rounded-md w-full block text-white">
                     @foreach ($errors->all() as $error)
@@ -37,20 +37,24 @@
             @method('POST')
             @csrf
             <div>
-                <label for="food" class="block text-sm mb-1 text-white">Total Food</label>
-                <input value="0" type="text" id="food" name="total_food" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" >
+                <label for="food" class="block text-sm mb-1 text-white">Food</label>
+                <input value="0" type="text" id="food" name="food" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white" >
             </div>
             <div>
-                <label for="wood" class="block text-sm mb-1 text-white">Total Wood</label>
-                <input value="0" type="text" id="wood" name="total_wood" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
+                <label for="wood" class="block text-sm mb-1 text-white">Wood</label>
+                <input value="0" type="text" id="wood" name="wood" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
             </div>
             <div>
-                <label for="wood" class="block text-sm mb-1 text-white">Total Steel</label>
-                <input value="0" type="text" id="steel" name="total_steel" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
+                <label for="wood" class="block text-sm mb-1 text-white">Steel</label>
+                <input value="0" type="text" id="steel" name="steel" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
             </div>
             <div>
-                <label for="wood" class="block text-sm mb-1 text-white">Total Oil</label>
-                <input value="0" type="text" id="oil" name="total_oil" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
+                <label for="wood" class="block text-sm mb-1 text-white">Oil</label>
+                <input value="0" type="text" id="oil" name="oil" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
+            </div>
+             <div>
+                <label for="delivery_time" class="block text-sm mb-1 text-white">Delivery Time</label>
+                <input value={{now()->format("d-m-Y")}} type="text" id="delivery_time" name="delivery_time" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
             </div>
             <div class="text-center">
                 <button type="submit" class="bg-green-600 hover:bg-yellow-500 text-white tracking-wider rounded-md px-4 py-2">Add Order</button>

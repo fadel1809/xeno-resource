@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id(); 
             $table->string('user_id');
             $table->string('username');
-            $table->string('food');
-            $table->string('wood');
-            $table->string('steel');
-            $table->string('oil');
+            $table->unsignedBigInteger('total_food')->default(0);
+            $table->unsignedBigInteger('total_wood')->default(0);
+            $table->unsignedBigInteger('total_steel')->default(0);
+            $table->unsignedBigInteger('total_oil')->default(0);
             $table->string('order_date');
             $table->timestamps();
         });

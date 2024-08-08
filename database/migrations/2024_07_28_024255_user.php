@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('region');
+            $table->string('loyalty_point')->default('0');
             $table->enum('role',['admin','user'])->default('user');
             $table->timestamps(); // Created at and updated at columns
         });

@@ -24,13 +24,16 @@
     <!-- Gambar dihapus untuk responsivitas lebih baik di layar kecil -->
  <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl lg:block hidden" alt="DLS"> 
     <div class="relative justify-center z-10 bg-black bg-opacity-50 p-6 shadow-lg rounded-md my-10 w-full max-w-5xl mx-4 sm:mx-auto">
-        <a href={{ route('user.home',['id' => $user->id]) }} class="bg-blue-700 hover:bg-blue-400 text-white px-4 py-1 rounded-md">
+        <a href={{ route('admin.home',['id' => $admin->id]) }} class="bg-blue-700 hover:bg-blue-400 text-white px-4 py-1 rounded-md">
             <i class="fa-solid fa-arrow-left"></i>
             Back
         </a>
         <h1 class="text-2xl text-white text-center mb-4">
             {{$user->username}}'s Order
         </h1>
+        <a href={{ route("admin.add.detail.order", ['id' => $admin->id, 'customer' => $user->username,'orderId' => $orders->id]) }} class="block bg-green-600 hover:bg-green-500 text-white tracking-wider rounded-md px-4 py-2 text-center mb-4">
+            Add Delivery
+        </a>
         <div class="flex justify-center">
             <div class="bg-[#D26F37] flex py-5 flex-col justify-center items-center w-full lg:w-4/12 px-5 rounded-md" >
                 <h2 class="text-white text-3xl font-semibold" >Total</h2>
@@ -66,6 +69,7 @@
                         <th class="px-6 py-3 bg-red-800 text-left text-sm font-medium text-white uppercase tracking-widest text-center">Steel</th>
                         <th class="px-6 py-3 bg-red-800 text-left text-sm font-medium text-white uppercase tracking-widest text-center">Oil</th>
                         <th class="px-6 py-3 bg-red-800 text-left text-sm font-medium text-white uppercase tracking-widest text-center">Delivery Date</th>
+                        <th class="px-6 py-3 bg-red-800 text-left text-sm font-medium text-white uppercase tracking-widest text-center">Action</th>
                     </tr>
                 </thead>
                 @php
@@ -80,6 +84,11 @@
                         <td class="px-6 py-4 whitespace-nowrap tracking-widest">{{$item->steel}}M</td>
                         <td class="px-6 py-4 whitespace-nowrap tracking-widest">{{$item->oil}}M</td>
                         <td class="px-6 py-4 whitespace-nowrap tracking-widest">{{$item->delivery_time}}</td>
+                        <td class="tracking-wider px-6 py-4 whitespace-nowrap">
+                            <a class="bg-yellow-600 rounded-md px-3 py-1 hover:bg-yellow-400 text-white text-center" href={{ route("admin.edit.detail.order", ['id' => $admin->id, 'customer' => $user->username, 'orderId' => $orders->id,'orderDetailId' => $item->id ]) }}>
+                                Edit
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\order_details;
 use App\Models\Orders;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -49,6 +50,7 @@ class adminController extends Controller
         $errorMessage  = $request->validate([
             'username' => 'required',
             'region' => 'required'
+            
         ],[
             'username.required' => 'Username is empty',
             'region.required' => 'Region is empty'
@@ -61,6 +63,7 @@ class adminController extends Controller
             DB::table('users')->where(['username' => $customer])->update([
                 'username' => $requestData['username'],
                 'region' => $requestData['region'],
+                'loyalty_point' => $requestData['loyalty_point']
             ]);
             
 
@@ -73,17 +76,17 @@ class adminController extends Controller
 
     }
     public function addOrder ($id, $customer, Request $request){
-        $errorMessage  = $request->validate([
-            'food' => 'required',
-            'wood' => 'required',
-            'steel' => 'required',            
-            'oil' => 'required'
+        $errorMessage = $request->validate([
+            'total_food' => 'required',
+            'total_wood' => 'required',
+            'total_steel' => 'required',            
+            'total_oil' => 'required'
 
         ],[
-            'food.required' => 'Food is empty',
-            'wood.required' => 'Wood is empty',
-            'steel.required' => 'Steel is empty',
-            'oil.required' => 'Oil is empty'
+            'total_food.required' => 'Food is empty',
+            'total_wood.required' => 'Wood is empty',
+            'total_steel.required' => 'Steel is empty',
+            'total_oil.required' => 'Oil is empty'
         ]);
         if(!$errorMessage){
             return redirect()->back();
@@ -94,15 +97,16 @@ class adminController extends Controller
             $addOrder = Orders::create([
                 'user_id' => $user->id,
                 'username' => $user->username,
-                'food' => $requestData['food'],
-                'wood' => $requestData['wood'],
-                'steel' => $requestData['steel'],
-                'oil' => $requestData['oil'],
+                'total_food' => $requestData['total_food'],
+                'total_wood' => $requestData['total_food'],
+                'total_steel' => $requestData['total_food'],
+                'total_oil' => $requestData['total_food'],
                 'order_date' => now()->format('d-m-Y')
             ]);
             if(!$addOrder){
                 return redirect()->back()->withErrors(['message'=>'something wrong']);
             }
+            
             return redirect(route('admin.track.customer',['id'=>$id,'customer'=>$customer]));
         } catch (\Error $e) {
             throw $e;
@@ -110,16 +114,18 @@ class adminController extends Controller
     }
     public function editOrder ($id,$customer,$orderId, Request $request){
         $errorMessage  = $request->validate([
-            'food' => 'required',
-            'wood' => 'required',
-            'steel' => 'required',            
-            'oil' => 'required'
+            'total_food' => 'required',
+            'total_wood' => 'required',
+            'total_steel' => 'required',            
+            'total_oil' => 'required',
+            'order_date' => 'required'
 
         ],[
-            'food.required' => 'Food is empty',
-            'wood.required' => 'Wood is empty',
-            'steel.required' => 'Steel is empty',
-            'oil.required' => 'Oil is empty'
+            'total_food.required' => 'Food is empty',
+            'total_wood.required' => 'Wood is empty',
+            'total_steel.required' => 'Steel is empty',
+            'total_oil.required' => 'Oil is empty',
+            'order_date.required' => 'Order date is empty'
         ]);
         if(!$errorMessage){
             return redirect()->back();
@@ -127,10 +133,11 @@ class adminController extends Controller
         $requestData = $request->all();
         try {
             DB::table('orders')->where(['id' => $orderId])->update([
-                'food' => $requestData['food'],
-                'wood' => $requestData['wood'],
-                'steel' => $requestData['steel'],
-                'oil' => $requestData['oil'],
+                'total_food' => $requestData['total_food'],
+                'total_wood' => $requestData['total_wood'],
+                'total_steel' => $requestData['total_steel'],
+                'total_oil' => $requestData['total_oil'],
+                'order_date' => $requestData['order_date']
             ]);
 
             return redirect(route('admin.track.customer', ['id' => $id,'customer'=>$customer]));
@@ -145,8 +152,12 @@ class adminController extends Controller
     public function showLandingAdminPage($id, Request $request)
     {
         $idCookie = intval($request->cookie('userId'));
+        $roleCookie = $request->cookie('role');
         $idParam = intval($id);
         if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        if($roleCookie != 'admin'){
             return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
         }
         $admin = User::find($id);
@@ -156,16 +167,24 @@ class adminController extends Controller
     public function showRegisterCustomerPage($id,Request $request)
     {
         $idCookie = intval($request->cookie('userId'));
+        $roleCookie = $request->cookie('role');
         $idParam = intval($id);
         if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        if($roleCookie != 'admin'){
             return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
         }
         return view('admin/RegisterCustomer',['userId'=>$id]);
     }
     public function showEditCustomerPage($id,$customer,Request $request){
         $idCookie = intval($request->cookie('userId'));
+        $roleCookie = $request->cookie('role');
         $idParam = intval($id);
         if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        if($roleCookie != 'admin'){
             return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
         }
         $admin = User::find($id);
@@ -175,8 +194,12 @@ class adminController extends Controller
     }
     public function showTrackOrderCustomerPage($id,$customer, Request $request){
         $idCookie = intval($request->cookie('userId'));
+        $roleCookie = $request->cookie('role');
         $idParam = intval($id);
         if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        if($roleCookie != 'admin'){
             return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
         }
         $admin = User::find($id);
@@ -187,8 +210,12 @@ class adminController extends Controller
     }
     public function showEditOrderPage($id,$customer,$orderId, Request $request){
         $idCookie = intval($request->cookie('userId'));
+        $roleCookie = $request->cookie('role');
         $idParam = intval($id);
         if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        if($roleCookie != 'admin'){
             return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
         }
         $order = Orders::find($orderId);
@@ -198,12 +225,135 @@ class adminController extends Controller
     }
     public function showAddOrderPage($id,$customer, Request $request){
         $idCookie = intval($request->cookie('userId'));
+        $roleCookie = $request->cookie('role');
         $idParam = intval($id);
         if ($idParam !== $idCookie) {
             return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
         }
+        if($roleCookie != 'admin'){
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
         $admin = User::find($id);
         $user = User::where('username', '=', $customer)->first();
-        return view('admin/AddOrderCustomer',compact('user'),compact('admin'));
+        return view('admin/AddOrderCustomer',compact('admin','user'));
+    }
+    public function showDetailOrder($id,$customer, Request $request,$orderId){
+        $idCookie = intval($request->cookie('userId'));
+        $roleCookie = $request->cookie('role');
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        if($roleCookie != 'admin'){
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        $admin = User::find($id);
+        $user = User::where('username', '=', $customer)->first();
+        $orders = Orders::where('id','=',$orderId)->first();
+        $order_detail = order_details::where('order_id','=',$orderId)->get();
+        $foodSum = order_details::where('order_id','=',$orderId)->sum('food');
+        $woodSum = order_details::where('order_id','=',$orderId)->sum('wood');
+        $steelSum = order_details::where('order_id','=',$orderId)->sum('steel');
+        $oilSum = order_details::where('order_id','=',$orderId)->sum('oil');
+
+        return view('admin/DetailOrder',compact('admin','user','orders','foodSum','woodSum','steelSum','oilSum'),['data' => $order_detail]);
+    }
+    public function showAddDetailOrder($id,$customer, Request $request,$orderId){
+        $idCookie = intval($request->cookie('userId'));
+        $roleCookie = $request->cookie('role');
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        if($roleCookie != 'admin'){
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        $admin = User::find($id);
+        $user = User::where('username', '=', $customer)->first();
+        $orders = Orders::where('id','=',$orderId)->first();
+        return view('admin/AddDetailOrder',compact('admin','user','orders'));
+    }
+       public function showEditDetailOrder($id,$customer, Request $request,$orderId,$orderDetailId){
+        $idCookie = intval($request->cookie('userId'));
+        $roleCookie = $request->cookie('role');
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first (cookie)']);
+        }
+        if($roleCookie != 'admin'){
+            return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
+        }
+        $admin = User::find($id);
+        $user = User::where('username', '=', $customer)->first();
+        $orders = Orders::where('id','=',$orderId)->first();
+        $orderDetail = order_details::find($orderDetailId)->first();
+        return view('admin/EditDetailOrder',compact('admin','user','orders','orderDetail'));
+    }
+    public function addDetailOrder ($id,$customer,$orderId, Request $request){
+        $errorMessage  = $request->validate([
+            'food' => 'required',
+            'wood' => 'required',
+            'steel' => 'required',            
+            'oil' => 'required',
+            'delivery_time' => 'required'
+
+        ],[
+            'food.required' => 'Food is empty',
+            'wood.required' => 'Wood is empty',
+            'steel.required' => 'Steel is empty',
+            'oil.required' => 'Oil is empty',
+            'delivery_time.required' => 'Order date is empty'
+        ]);
+        if(!$errorMessage){
+            return redirect()->back();
+        }      
+        $requestData = $request->all();
+        try {
+            $user = User::where('username','=',$customer)->first();
+            order_details::create([
+                'order_id' => $orderId,
+                'user_id' => $user->id,
+                'food' => $requestData['food'],
+                'wood' => $requestData['wood'],
+                'steel' => $requestData['steel'],
+                'oil' => $requestData['oil'],
+                'delivery_time' => $requestData['delivery_time']
+            ]);
+            return redirect(route('admin.detail.order',['id' => $id, 'customer' => $customer,'orderId' =>strval($orderId)   ]));
+        } catch (\Error $e) {
+            throw $e;
+        }
+    }
+    public function editDetailOrder ($id,$customer,$orderId,$orderDetailId, Request $request){
+        $errorMessage  = $request->validate([
+            'food' => 'required',
+            'wood' => 'required',
+            'steel' => 'required',            
+            'oil' => 'required',
+            'delivery_time' => 'required'
+
+        ],[
+            'food.required' => 'Food is empty',
+            'wood.required' => 'Wood is empty',
+            'steel.required' => 'Steel is empty',
+            'oil.required' => 'Oil is empty',
+            'delivery_time.required' => 'Delivery Time is empty'
+        ]);
+        if(!$errorMessage){
+            return redirect()->back();
+        }      
+        $requestData = $request->all();
+        try {
+            DB::table('order_details')->where(['id' => $orderDetailId])->update([
+                'food' => $requestData['food'],
+                'wood' => $requestData['wood'],
+                'steel' => $requestData['steel'],
+                'oil' => $requestData['oil'],
+                'delivery_time' => $requestData['delivery_time']
+            ]);
+            return redirect(route('admin.detail.order',['id' => $id, 'customer' => $customer,'orderId' =>strval($orderId)   ]));
+        } catch (\Error $e) {
+            throw $e;
+        }
     }
 }

@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Orders extends Model
+class order_details extends Model
 {
-    use HasFactory,Notifiable,HasApiTokens;
-     protected $fillable = [
+        use HasFactory,Notifiable,HasApiTokens;
+        protected $fillable = [
         'user_id',
-        'order_date',
-        'username',
-        'total_food',
-        'total_wood',
-        'total_steel',
-        'total_oil',
+        'order_id',
+        'food',
+        'wood',
+        'steel',
+        'oil',
+        'delivery_time'
     ];
 }

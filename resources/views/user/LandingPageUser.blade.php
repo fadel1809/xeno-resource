@@ -19,6 +19,15 @@
 <body class="bg-[#380606] flex justify-center min-h-screen relative">
     <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl hidden md:block" alt="DLS">
     <div class="relative z-10 bg-black bg-opacity-50 p-4 md:p-6 shadow-lg rounded-md my-10 w-full max-w-5xl">
+        <div class="">
+            <form action={{route('user.logout')}} method="POST">
+                @method('POST')
+                @csrf
+                <button class="bg-red-600 hover:bg-red-400 text-white px-4 py-1 tracking-wider rounded-sm" type="submit">
+                    Logout
+                </button>
+            </form>
+        </div>
         <h1 class="text-xl md:text-2xl text-white text-center mb-2">
             My Order        
         </h1>
@@ -26,6 +35,11 @@
             <thead>
                 <tr class="text-center text-sm md:text-lg">
                     <th class="px-2 py-3 md:px-6 bg-red-800 text-left text-xs md:text-sm font-medium text-white uppercase tracking-widest text-center">Order ID</th>
+                    <th class="px-2 py-3 md:px-6 bg-red-800 text-left text-xs md:text-sm font-medium text-white uppercase tracking-widest text-center">Total Food</th>
+                    <th class="px-2 py-3 md:px-6 bg-red-800 text-left text-xs md:text-sm font-medium text-white uppercase tracking-widest text-center">Total Wood</th>
+                    <th class="px-2 py-3 md:px-6 bg-red-800 text-left text-xs md:text-sm font-medium text-white uppercase tracking-widest text-center">Total Steel</th>
+                    <th class="px-2 py-3 md:px-6 bg-red-800 text-left text-xs md:text-sm font-medium text-white uppercase tracking-widest text-center">Total Oil</th>
+
                     <th class="px-2 py-3 md:px-6 bg-red-800 text-left text-xs md:text-sm font-medium text-white uppercase tracking-widest text-center">Order Date</th>
                     <th class="px-2 py-3 md:px-6 bg-red-800 text-left text-xs md:text-sm font-medium text-white uppercase tracking-widest text-center">Action</th>
                 </tr>
@@ -34,9 +48,14 @@
                 @foreach ($data as $item)
                 <tr class="text-center">
                     <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->id}}</td>
+                    <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->total_food}}M</td>
+                    <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->total_wood}}M</td>
+                    <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->total_steel}}M</td>
+                    <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->total_oil}}M</td>
                     <td class="px-2 py-4 whitespace-nowrap tracking-widest text-xs md:text-sm">{{$item->order_date}}</td>
+
                     <td class="tracking-wider px-2 py-4 whitespace-nowrap">
-                        <a href={{route("user.detail.order",['id'=>$user->id,'orderId' => $item->id])}} class="text-xs md:text-sm mr-2 hover:text-red-500">
+                        <a href={{route("user.detail.order",['id'=>$user->id,'orderId' => $item->id])}} class="text-xs md:text-sm mr-2  bg-blue-600 rounded-md px-3 py-1 hover:bg-blue-400 text-white text-center">
                             Detail Order
                         </a> 
                     </td>

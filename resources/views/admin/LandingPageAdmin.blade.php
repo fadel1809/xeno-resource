@@ -23,6 +23,15 @@
     <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl lg:block hidden" alt="DLS"> 
 
     <div class="relative z-10 bg-black bg-opacity-50 p-6 shadow-lg rounded-md my-10 w-full max-w-xl mx-4 sm:mx-auto">
+        <div class="">
+            <form action={{route('user.logout')}} method="POST">
+                @method('POST')
+                @csrf
+                <button class="bg-red-600 hover:bg-red-400 text-white px-4 py-1 tracking-wider rounded-sm" type="submit">
+                    Logout
+                </button>
+            </form>
+        </div>
         <h1 class="text-2xl text-white text-center mb-4">
             Customer List
         </h1>
@@ -43,14 +52,19 @@
                     <tr class="text-center">
                         <td class="px-4 py-4 whitespace-nowrap tracking-widest"> {{$item->username}} </td>
                         <td class="px-4 py-4 whitespace-nowrap tracking-widest"> {{$item->region}} </td>
-                        <td class="tracking-wider px-4 py-4 whitespace-nowrap">
-                            <a href={{ route("admin.track.customer", ['id' => $admin, 'customer' => $item->username]) }} class="mr-2 hover:text-red-500">
-                                Track Order
-                            </a>
-                            <a href={{ route("admin.edit.customer", ['id' => $admin, 'customer' => $item->username]) }} class="hover:text-red-500">
-                                Edit
-                            </a>
-                        </td>    
+                       <td class="tracking-wider px-4 py-4 whitespace-nowrap text-center">
+    <div class="flex justify-center space-x-2">
+        <a href="{{ route('admin.track.customer', ['id' => $admin, 'customer' => $item->username]) }}" 
+           class="bg-blue-600 rounded-md px-3 py-1 hover:bg-blue-400 text-white text-center">
+            Track Order
+        </a>
+        <a href="{{ route('admin.edit.customer', ['id' => $admin, 'customer' => $item->username]) }}" 
+           class="bg-yellow-600 rounded-md px-3 py-1 hover:bg-yellow-400 text-white text-center">
+            Edit
+        </a>
+    </div>
+</td>
+    
                         
                     </tr>
                     @endforeach

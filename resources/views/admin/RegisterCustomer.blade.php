@@ -9,7 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
         body {
             font-family: "Oswald", sans-serif;
         }
@@ -18,6 +20,11 @@
 <body class="bg-[#380606] flex justify-center min-h-screen relative tracking-wider">
     <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl hidden lg:block" alt="DLS">
     <div class="relative z-10 bg-black bg-opacity-50 p-6 shadow-lg rounded-md my-10 w-full max-w-xl">
+        <a href={{ route('admin.home',['id' => $userId]) }} class="bg-blue-700 hover:bg-blue-400 text-white px-4 py-1 rounded-md">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+        </a>
+
         <h1 class="text-2xl text-white text-center mb-2">Register Customer</h1>
         <form action={{route('admin.register.customer',['id' => $userId])}} method="POST" class="space-y-4">
             <!-- Username Field -->
