@@ -44,6 +44,7 @@
                     <tr class="text-center text-lg">
                         <th class="px-4 py-3 bg-red-800 text-sm font-medium text-white uppercase tracking-widest text-center">Name</th>
                         <th class="px-4 py-3 bg-red-800 text-sm font-medium text-white uppercase tracking-widest text-center">Region</th>
+                        <th class="px-4 py-3 bg-red-800 text-sm font-medium text-white uppercase tracking-widest text-center">Loyalty Point</th>                        
                         <th class="px-4 py-3 bg-red-800 text-sm font-medium text-white uppercase tracking-widest text-center">Action</th>
                     </tr>
                 </thead>
@@ -52,6 +53,7 @@
                     <tr class="text-center">
                         <td class="px-4 py-4 whitespace-nowrap tracking-widest"> {{$item->username}} </td>
                         <td class="px-4 py-4 whitespace-nowrap tracking-widest"> {{$item->region}} </td>
+                        <td class="px-4 py-4 whitespace-nowrap tracking-widest"> {{$item->loyalty_point}} pts</td>
                        <td class="tracking-wider px-4 py-4 whitespace-nowrap text-center">
     <div class="flex justify-center space-x-2">
         <a href="{{ route('admin.track.customer', ['id' => $admin, 'customer' => $item->username]) }}" 

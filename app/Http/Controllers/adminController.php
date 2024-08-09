@@ -286,7 +286,7 @@ class adminController extends Controller
         $admin = User::find($id);
         $user = User::where('username', '=', $customer)->first();
         $orders = Orders::where('id','=',$orderId)->first();
-        $orderDetail = order_details::find($orderDetailId)->first();
+        $orderDetail = order_details::find($orderDetailId);
         return view('admin/EditDetailOrder',compact('admin','user','orders','orderDetail'));
     }
     public function addDetailOrder ($id,$customer,$orderId, Request $request){

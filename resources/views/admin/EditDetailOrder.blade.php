@@ -58,7 +58,7 @@
             </div>
             <div>
                 <label for="delivery_time" class="block text-sm mb-1 text-white">Delivery Time</label>
-                <input value={{$orderDetail->delivery_time}} type="text" id="delivery_time" name="delivery_time" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
+                <input value="{!! $orderDetail->delivery_time !!}" type="text" id="delivery_time" name="delivery_time" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
             </div>
 
             <div class="text-center">

@@ -31,6 +31,13 @@
         <h1 class="text-xl md:text-2xl text-white text-center mb-2">
             My Order        
         </h1>
+        <div class=" py-1 px-3 flex justify-center bg-[#D26F37] lg:w-2/12 text-white rounded-md tracking-wider">
+            <p>
+                Loyalty Points: {{$user->loyalty_point}} pts
+            </p>
+        </div>
+        <div class="overflow-x-auto">
+
         <table class="min-w-full divide-y divide-gray-700 mt-3">
             <thead>
                 <tr class="text-center text-sm md:text-lg">
@@ -63,6 +70,8 @@
                 @endforeach
             </tbody>
         </table>
+                </div>
+
     </div>
     <a href="https://discordapp.com/users/1050097422593949808" class="">
         <div class="text-purple-800 text-center absolute top-3/4 right-4 md:right-10 z-10 bg-gray-300 rounded-full py-3 md:py-3 border-4 border-purple-700 px-3 md:px-2 hover:text-gray-300 hover:bg-purple-800 hover:border-purple-800">
