@@ -9,11 +9,8 @@ use Illuminate\Http\Request;
 
 class userController extends Controller
 {
-    
-
-
     public function showLandingUserPage($id,Request $request){
-       $idCookie = intval($request->cookie('userId'));
+        $idCookie = intval($request->cookie('userId'));
         $roleCookie = $request->cookie('role');
         $idParam = intval($id);
         if ($idParam !== $idCookie) {

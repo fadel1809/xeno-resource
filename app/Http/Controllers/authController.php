@@ -51,7 +51,7 @@ class authController extends Controller
             Cookie::queue('role',$role,$oneDay);
             return redirect(route('user.home',['id' => $id]));
         } else {
-            return redirect(route('user.login'))->withErrors(['message' => 'Password salah']);
+            return redirect(route('user.login'))->withErrors(['message' => 'Incorrect Password']);
         }
     }
     public function showLoginForm(){
