@@ -203,8 +203,9 @@ class adminController extends Controller
             return redirect(route('user.login'))->withErrors(['message' => 'Please login first']);
         }
         $admin = User::find($id);
-        $user = User::where('username', '=', $customer)->first();
-        $orders = Orders::where('user_id','=',$user->id)->get();
+        $users = User::where('username', '=', $customer)->first();
+        $user = User::where('id', '=', $users->id)->first();
+        $orders = Orders::where('user_id','=',$users->id)->get();
 
         return view('admin/TrackOrderCustomer',['data' => $orders], compact('admin','user'));
     }
@@ -220,7 +221,8 @@ class adminController extends Controller
         }
         $order = Orders::find($orderId);
         $admin = User::find($id);
-        $user = User::where('username', '=', $customer)->first();
+        $users = User::where('username', '=', $customer)->first();
+        $user =  User::where('id', '=', $users->id)->first();
         return view('admin/EditOrder',compact('order','admin','user'));
     }
     public function showAddOrderPage($id,$customer, Request $request){

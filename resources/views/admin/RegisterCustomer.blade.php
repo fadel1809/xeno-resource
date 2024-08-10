@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Xeno Resources</title>
+    <title>Amerta Resources</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
 
 <style>
         body {
@@ -26,7 +27,7 @@
         </a>
 
         <h1 class="text-2xl text-white text-center mb-2">Register Customer</h1>
-        <form action={{route('admin.register.customer',['id' => $userId])}} method="POST" class="space-y-4">
+        <form action={{route('admin.register.customer.post',['id' => $userId])}} method="POST" class="space-y-4">
             <!-- Username Field -->
              @if ($errors->any())
                                     <div class="bg-red-800 py-2 px-2 rounded-md w-full block text-white">

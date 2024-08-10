@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Xeno Resources</title>
+    <title>Amerta Resources</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
 
 </head>
 <style>
@@ -21,7 +22,7 @@
     <img src="/assets/image/bgdls.png" class="absolute top-6 left-11 z-1 opacity-70 rounded-2xl hidden lg:block" alt="DLS">
     <div class="relative z-10 rounded-md bg-black bg-opacity-50 p-6 shadow-lg max-w-xs w-full">
         <img src="/assets/image/banner.png" class="w-full mb-4 rounded-md" alt="Banner">
-        <form action={{route('user.login')}} method="POST" class="text-black space-y-4">
+        <form action={{route('user.login.post')}} method="POST" class="text-black space-y-4">
             @if ($errors->any())
                                     <div class="bg-red-800 py-2 px-2 rounded-md w-full block text-white">
                                         @foreach ($errors->all() as $error)

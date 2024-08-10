@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Xeno Resources</title>
+    <title>Amerta Resources</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
 
  <style>
         body {
@@ -25,7 +26,7 @@
             Back
         </a>
         <h1 class="text-2xl text-white text-center mb-2">Edit Order</h1>
-        <form action={{route('admin.edit.order',['id'=>$admin->id,'customer'=>$user->username,'orderId'=>$order->id])}} method="POST" class="space-y-4">
+        <form action={{route('admin.edit.order.put',['id'=>$admin->id,'customer'=>$user->username,'orderId'=>$order->id])}} method="POST" class="space-y-4">
              @if ($errors->any())
                                     <div class="bg-red-800 py-2 px-2 rounded-md w-full block text-white">
                                         @foreach ($errors->all() as $error)
@@ -54,7 +55,7 @@
             </div>
             <div>
                 <label for="order_date" class="block text-sm mb-1 text-white">Order Date</label>
-                <input type="text" id="order_date" name="order_date" value={{$order->order_date}} class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
+                <input type="text" id="order_date" name="order_date" value="{!!$order->order_date!!}" class="w-full px-3 py-2 bg-gray-800 rounded border border-gray-600 text-white">
             </div>
             <div class="text-center">
                 <button type="submit" class="bg-yellow-600 hover:bg-yellow-500 text-white tracking-wider rounded-md px-4 py-2">Edit</button>
